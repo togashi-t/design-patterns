@@ -51,7 +51,7 @@ object Strategy extends App {
   md.performQuack
   md.performFly
 
-  
+
   // abstract class Duck(val quackBehavior: QuackBehavior, val flyBehavior: FlyBehavior) {}
   // class MallardDuck extends Duck(new Quack, new FlyWithWings)
   // というように、コンストラクタを使用した書き方にするのがおそらく一般的
