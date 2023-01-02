@@ -42,10 +42,17 @@ object Strategy extends App {
     val flyBehavior = new FlyWithWings
   }
 
+
+
   // Duckの振る舞いは別のクラス（特定の振る舞いのtraitを実装したクラス）に配置している。
   // そのため、Duckのサブクラスはそれぞれの振る舞いの実装の詳細を知る必要が無い。
 
   val md = new MallardDuck
   md.performQuack
   md.performFly
+
+  
+  // abstract class Duck(val quackBehavior: QuackBehavior, val flyBehavior: FlyBehavior) {}
+  // class MallardDuck extends Duck(new Quack, new FlyWithWings)
+  // というように、コンストラクタを使用した書き方にするのがおそらく一般的
 }
