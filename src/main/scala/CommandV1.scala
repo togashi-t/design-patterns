@@ -1,4 +1,4 @@
-object Command extends App {
+object CommandV1 extends App {
 
   // コマンド（注文）
   trait Command {
