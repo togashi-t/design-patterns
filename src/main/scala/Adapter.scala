@@ -62,4 +62,5 @@ object Adapter extends App {
     def remove = throw new UnsupportedOperationException
   }
 
+  
 }
