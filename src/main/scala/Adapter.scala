@@ -61,5 +61,5 @@ object Adapter extends App {
     def next = enumeration.nextElement
     def remove = throw new UnsupportedOperationException
   }
-  
+
 }
