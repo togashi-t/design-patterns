@@ -1,6 +1,6 @@
 import java.util
 
-object Iterator {
+object Iterator extends App {
   // 性質上、全体的にmutableな書き方になるのは仕方がない
 
   class MenuItem(name: String, description: String, vegetarian: Boolean, price: Double) {
@@ -26,7 +26,7 @@ object Iterator {
       menuItem
     }
 
-    def hasNext: Boolean = position + 1 < items.length
+    def hasNext: Boolean = position + 1 <= items.length
   }
 
   class DinerMenu {
@@ -34,10 +34,30 @@ object Iterator {
     val MAX_ITEMS = 6
     var numberOfItems = 0
     val menuItems = new Array[MenuItem](MAX_ITEMS) // 格納できる最大個数を指定して初期化
-    addItem("K&B's Pancake Breakfast", "Pancakes with scrambled eggs, and toast", true, 2.99)
-    addItem("Regular Pancake Breakfast", "Pancakes with fried eggs, sausage", false, 2.99)
-    addItem("Blueberry Pancakes", "Pancakes made with fresh blueberries, and blueberry syrup", true, 3.49)
-    addItem("Waffles", "Waffles, with your choice of blueberries or strawberries", true, 3.59)
+    addItem("Vegetarian BLT",
+      "(Fakin') Bacon with lettuce & tomato on whole wheat",
+      true,
+      2.99)
+    addItem("BLT",
+      "Bacon with lettuce & tomato on whole wheat",
+      false,
+      2.99)
+    addItem("Soup of the day",
+      "A bowl of the soup of the day, with a side of potato salad",
+      false,
+      3.29)
+    addItem("Hot Dog",
+      "A hot dog, with saurkraut, relish, onions, topped with cheese",
+      false,
+      3.05)
+    addItem("Steamed Veggies and Brown Rice",
+      "Steamed vegetables over brown rice",
+      true,
+      3.99)
+    addItem("Pasta",
+      "Spaghetti with marinara sauce, and a slice of sourdough bread",
+      true,
+      3.89)
 
     def addItem(name: String, description: String, vegetarian: Boolean, price: Double): Unit = {
       if (numberOfItems >= MAX_ITEMS) {
@@ -65,11 +85,15 @@ object Iterator {
       menuItem
     }
 
-    def hasNext: Boolean = position + 1 < items.size
+    def hasNext: Boolean = position + 1 <= items.size
   }
 
   class PancakeHouseMenu {
     val menuItems = new util.ArrayList[MenuItem]
+    addItem("K&B's Pancake Breakfast", "Pancakes with scrambled eggs and toast", true, 2.99)
+    addItem("Regular Pancake Breakfast", "Pancakes with fried eggs, sausage", false,   2.99)
+    addItem("Blueberry Pancakes", "Pancakes made with fresh blueberries, and blueberry syrup",true, 3.49)
+    addItem("Waffles", "Waffles with your choice of blueberries or strawberries", true, 3.59)
 
     def addItem(name: String, description: String, vegetarian: Boolean, price: Double): Unit =
       menuItems.add(new MenuItem(name, description, vegetarian, price))
@@ -78,5 +102,33 @@ object Iterator {
   }
 
 
+  class Waitress(pancakeHouseMenu: PancakeHouseMenu, dinerMenu: DinerMenu) {
+    def printMenu: Unit = {
+      val pancakeIterator = pancakeHouseMenu.createIterator
+      val dinerIterator = dinerMenu.createIterator
+
+      println("メニュー\n---\n朝食")
+      printMenu(pancakeIterator)
+      println("\n昼食")
+      printMenu(dinerIterator)
+    }
+
+    def printMenu(iterator: Iterator): Unit = {
+      while (iterator.hasNext) {
+        val menuItem = iterator.next
+        print(menuItem.getName + "、")
+        print(menuItem.getPrice + " -- ")
+        println(menuItem.getName)
+      }
+    }
+  }
+
+
+
+  // 試してみる
+  val pancakeHouseMenu = new PancakeHouseMenu
+  val dinerMenu = new DinerMenu
+  val waitress = new Waitress(pancakeHouseMenu, dinerMenu)
+  waitress.printMenu
 
 }
