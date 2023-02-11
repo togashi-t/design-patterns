@@ -1,6 +1,6 @@
 import java.util
 
-object Iterator extends App {
+object IteratorV1 extends App {
   // 性質上、全体的にmutableな書き方になるのは仕方がない
 
   class MenuItem(name: String, description: String, vegetarian: Boolean, price: Double) {
