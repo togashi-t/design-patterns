@@ -64,4 +64,28 @@ object Composite extends App {
     def printMenu: Unit = allMenus.print
   }
 
+
+
+  // 試してみる
+  // 各メニュー
+  val pancakeHouseMenu = new Menu("パンケーキハウスメニュー", "朝食")
+  val dinerMenu = new Menu("食堂メニュー", "昼食")
+  val cafeMenu = new Menu("カフェメニュー", "夕食")
+  val dessertMenu = new Menu("デザートメニュー", "もちろんデザート")
+  // 最上位のメニュー
+  val allMenus = new Menu("すべてのメニュー", "すべてを統合したメニュー")
+  // 各メニューを追加
+  allMenus.add(pancakeHouseMenu)
+  allMenus.add(dinerMenu)
+  allMenus.add(cafeMenu)
+  // 各メニューにメニューアイテムを追加するのは面倒なので、昼食メニューにだけ追加
+  dinerMenu.add(new MenuItem("パスタ", "マリナラソーススパゲティとサワードウパン", true, 3.89))
+  // 昼食メニューにデザートメニューを追加
+  dinerMenu.add(dessertMenu)
+  // デザートメニューにメニューアイテムを追加
+  dessertMenu.add(new MenuItem("アップルパイ", "バニラアイスクリームをのせたフレーク状生地のアップルパイ", true, 1.59))
+
+  new Waitress(allMenus).printMenu
+
+
 }
